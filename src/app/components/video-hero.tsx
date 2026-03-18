@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
-import logoImage from '/logo-dark.png';
+import logoImage from '/logo-light.png';
 
 export function VideoHero() {
   const [videoError, setVideoError] = useState(false);
@@ -70,7 +70,8 @@ export function VideoHero() {
             <img
               src={logoImage}
               alt="Santa Mesa"
-              className="h-28 md:h-36 w-auto mx-auto"
+              className="h-40 md:h-52 w-auto mx-auto"
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
           </motion.div>
 

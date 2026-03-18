@@ -30,7 +30,6 @@ import { TermsOfService } from './pages/terms-of-service';
 import { ChatWidget } from './components/chat-widget';
 import { CalendlyEmbed } from './components/calendly-embed';
 import logoLight from '/logo-light.png';
-import logoDark from '/logo-dark.png';
 
 const SERVICES = [
   {
@@ -159,9 +158,9 @@ function App() {
                 aria-label="Scroll to top"
               >
                 <img
-                  src={isScrolled ? logoLight : logoDark}
+                  src={logoLight}
                   alt="Santa Mesa"
-                  className="h-20 w-auto transition-all duration-300"
+                  className="h-24 w-auto transition-all duration-300"
                   style={isScrolled ? {} : { filter: 'brightness(0) invert(1)' }}
                 />
               </motion.button>
@@ -473,7 +472,7 @@ function App() {
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-3 gap-12 mb-12">
               <div>
-                <img src={logoDark} alt="Santa Mesa" className="h-20 w-auto mb-5" />
+                <img src={logoLight} alt="Santa Mesa" className="h-28 w-auto mb-5" style={{ filter: 'brightness(0) invert(1)' }} />
                 <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>
                   AI-powered marketing and CRM automation for ambitious businesses.
                 </p>
