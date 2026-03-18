@@ -18,7 +18,7 @@ import {
   BarChart3,
 } from 'lucide-react';
 import { ServiceCard } from './components/service-card';
-import { BookingCalendar } from './components/booking-calendar';
+
 import { StatsSection } from './components/stats-section';
 import { VideoHero } from './components/video-hero';
 import { SEOHead } from './components/seo-head';
@@ -27,6 +27,8 @@ import { TestimonialsSection } from './components/testimonials-section';
 import { Toaster } from './components/ui/sonner';
 import { PrivacyPolicy } from './pages/privacy-policy';
 import { TermsOfService } from './pages/terms-of-service';
+import { ChatWidget } from './components/chat-widget';
+import { CalendlyEmbed } from './components/calendly-embed';
 import logoLight from '/logo-light.png';
 import logoDark from '/logo-dark.png';
 
@@ -449,7 +451,7 @@ function App() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <BookingCalendar />
+                <CalendlyEmbed />
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -542,6 +544,9 @@ function App() {
             </div>
           </div>
         )}
+
+        {/* Chat Widget */}
+        <ChatWidget />
 
         {/* Terms Modal */}
         {showTerms && (
