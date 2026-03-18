@@ -31,7 +31,12 @@ export function ContactForm() {
     }
     setIsSubmitting(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error('Failed');
       toast.success("Message sent! We'll get back to you within 24 hours.");
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch {
