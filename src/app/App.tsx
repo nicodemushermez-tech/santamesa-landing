@@ -25,7 +25,8 @@ import { TestimonialsSection } from './components/testimonials-section';
 import { Toaster } from './components/ui/sonner';
 import { PrivacyPolicy } from './pages/privacy-policy';
 import { TermsOfService } from './pages/terms-of-service';
-import logoImage from '/logo.png';
+import logoDark from '/logo-dark.png';
+import logoLight from '/logo-light.png';
 
 const SERVICES = [
   {
@@ -134,11 +135,9 @@ function App() {
                 aria-label="Scroll to top"
               >
                 <img
-                  src={logoImage}
+                  src={isScrolled ? logoLight : logoDark}
                   alt="Santa Mesa Logo"
-                  className={`h-24 w-auto transition-all duration-300 ${
-                    isScrolled ? '' : 'brightness-0 invert'
-                  }`}
+                  className="h-24 w-auto transition-all duration-300"
                 />
               </motion.button>
 
@@ -427,9 +426,9 @@ function App() {
             <div className="grid md:grid-cols-3 gap-8 mb-8">
               <div>
                 <img
-                  src={logoImage}
+                  src={logoDark}
                   alt="Santa Mesa"
-                  className="h-24 w-auto mb-4 brightness-0 invert"
+                  className="h-24 w-auto mb-4"
                 />
                 <p className="text-muted">
                   Empowering businesses with AI-driven marketing solutions and expert consultation.
