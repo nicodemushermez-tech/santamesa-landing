@@ -1,64 +1,48 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Mail, User, MessageSquare, Loader2 } from 'lucide-react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
 import { toast } from 'sonner';
+
+const inputStyle = {
+  background: '#080C14',
+  border: '1px solid #1E2D45',
+  color: '#F8FAFC',
+  borderRadius: '0.75rem',
+  padding: '12px 16px 12px 44px',
+  width: '100%',
+  fontSize: '14px',
+  outline: 'none',
+};
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validation
     if (!formData.name || !formData.email || !formData.message) {
       toast.error('Please fill in all required fields');
       return;
     }
-
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast.error('Please enter a valid email address');
       return;
     }
-
     setIsSubmitting(true);
-
     try {
-      // Simulate API call - replace with actual backend endpoint
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      toast.success('Message sent successfully! We\'ll get back to you within 24 hours.');
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-      });
-    } catch (error) {
-      toast.error('Failed to send message. Please try again or call us directly.');
-      console.error('Contact form error:', error);
+      toast.success("Message sent! We'll get back to you within 24 hours.");
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch {
+      toast.error('Failed to send. Please try again or call us directly.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
@@ -67,107 +51,91 @@ export function ContactForm() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="bg-white rounded-2xl shadow-xl p-8 border-2 border-secondary/20"
+      className="rounded-2xl p-8"
+      style={{ background: '#0F1623', border: '1px solid #1E2D45' }}
     >
       <div className="mb-6">
-        <h3 className="text-2xl font-semibold text-foreground mb-2">Send Us a Message</h3>
-        <p className="text-accent">Can't find a time? Drop us a message and we'll get back to you.</p>
+        <h3 className="text-lg font-semibold text-white mb-1">Send a Message</h3>
+        <p className="text-sm" style={{ color: '#64748B' }}>Can't find a time? Drop us a message instead.</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Name */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-            Name <span className="text-red-500">*</span>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>
+            Name <span style={{ color: '#C4956A' }}>*</span>
           </label>
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-secondary" />
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Your full name"
-              className="pl-10"
-              required
-              aria-required="true"
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#64748B' }} />
+            <input
+              name="name" type="text" value={formData.name} onChange={handleChange}
+              placeholder="Your full name" required style={inputStyle}
             />
           </div>
         </div>
 
+        {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-            Email <span className="text-red-500">*</span>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>
+            Email <span style={{ color: '#C4956A' }}>*</span>
           </label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-secondary" />
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="your.email@example.com"
-              className="pl-10"
-              required
-              aria-required="true"
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#64748B' }} />
+            <input
+              name="email" type="email" value={formData.email} onChange={handleChange}
+              placeholder="you@company.com" required style={inputStyle}
             />
           </div>
         </div>
 
+        {/* Phone */}
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-            Phone (Optional)
-          </label>
-          <Input
-            id="phone"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="1300 SANTA (1300 726 821)"
+          <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>Phone (Optional)</label>
+          <input
+            name="phone" type="tel" value={formData.phone} onChange={handleChange}
+            placeholder="0400 000 000"
+            style={{ ...inputStyle, paddingLeft: '16px' }}
           />
         </div>
 
+        {/* Message */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-            Message <span className="text-red-500">*</span>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>
+            Message <span style={{ color: '#C4956A' }}>*</span>
           </label>
           <div className="relative">
-            <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-secondary" />
-            <Textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Tell us about your project or question..."
-              className="pl-10 min-h-[120px]"
-              required
-              aria-required="true"
+            <MessageSquare className="absolute left-3 top-3 w-4 h-4" style={{ color: '#64748B' }} />
+            <textarea
+              name="message" value={formData.message} onChange={handleChange}
+              placeholder="Tell us about your project..."
+              required rows={5}
+              style={{ ...inputStyle, resize: 'none' }}
             />
           </div>
         </div>
 
-        <Button
+        <motion.button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-6 text-lg"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all"
+          style={{
+            background: 'linear-gradient(135deg, #C4956A, #A67850)',
+            color: '#080C14',
+            boxShadow: '0 0 20px rgba(196,149,106,0.2)',
+            opacity: isSubmitting ? 0.7 : 1,
+          }}
         >
           {isSubmitting ? (
-            <>
-              <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-              Sending...
-            </>
+            <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</>
           ) : (
-            <>
-              <Mail className="w-5 h-5 mr-2" />
-              Send Message
-            </>
+            <><Mail className="w-4 h-4" /> Send Message</>
           )}
-        </Button>
+        </motion.button>
 
-        <p className="text-xs text-center text-accent">
-          By submitting this form, you agree to our Privacy Policy and Terms of Service.
+        <p className="text-xs text-center" style={{ color: '#1E2D45' }}>
+          By submitting, you agree to our Privacy Policy and Terms of Service.
         </p>
       </form>
     </motion.div>

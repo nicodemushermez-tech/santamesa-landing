@@ -19,16 +19,21 @@ const TIME_SLOTS: TimeSlot[] = [
   { time: '4:00 PM', available: false },
 ];
 
+const inputStyle = {
+  background: '#080C14',
+  border: '1px solid #1E2D45',
+  color: '#F8FAFC',
+  borderRadius: '0.75rem',
+  padding: '12px 16px',
+  width: '100%',
+  fontSize: '14px',
+  outline: 'none',
+};
+
 export function BookingCalendar() {
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    service: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', company: '', service: '', message: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,13 +44,7 @@ export function BookingCalendar() {
         setIsSubmitted(false);
         setSelectedDate(null);
         setSelectedTime(null);
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          service: '',
-          message: '',
-        });
+        setFormData({ name: '', email: '', company: '', service: '', message: '' });
       }, 3000);
     }
   };
@@ -64,13 +63,13 @@ export function BookingCalendar() {
   const calendarDates = generateCalendarDates();
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="rounded-2xl p-8" style={{ background: '#0F1623', border: '1px solid #1E2D45' }}>
       <div className="grid lg:grid-cols-2 gap-8">
-        {/* Calendar Selection */}
+        {/* Calendar */}
         <div className="space-y-6">
           <div>
-            <h3 className="text-2xl font-semibold mb-4 flex items-center gap-2 text-foreground">
-              <Calendar className="w-6 h-6 text-primary" />
+            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-white">
+              <Calendar className="w-5 h-5" style={{ color: '#C4956A' }} />
               Select a Date
             </h3>
             <div className="grid grid-cols-5 gap-2">
@@ -78,7 +77,7 @@ export function BookingCalendar() {
                 const dayName = DAYS_OF_WEEK[date.getDay() === 0 ? 6 : date.getDay() - 1];
                 const dayNum = date.getDate();
                 const isWeekend = date.getDay() === 0 || date.getDay() === 6;
-                
+                const isSelected = selectedDate === index;
                 return (
                   <motion.button
                     key={index}
@@ -86,48 +85,42 @@ export function BookingCalendar() {
                     whileTap={{ scale: isWeekend ? 1 : 0.95 }}
                     onClick={() => !isWeekend && setSelectedDate(index)}
                     disabled={isWeekend}
-                    className={`p-3 rounded-lg border-2 transition-all ${
-                      isWeekend
-                        ? 'bg-muted/30 text-muted-foreground cursor-not-allowed border-muted'
-                        : selectedDate === index
-                        ? 'bg-primary text-primary-foreground border-primary shadow-lg'
-                        : 'bg-white hover:border-primary border-muted'
-                    }`}
+                    className="p-2.5 rounded-xl text-center transition-all"
+                    style={{
+                      background: isSelected ? 'linear-gradient(135deg, #C4956A, #A67850)' : '#080C14',
+                      border: isSelected ? 'none' : '1px solid #1E2D45',
+                      color: isWeekend ? '#1E2D45' : isSelected ? '#080C14' : '#94A3B8',
+                      cursor: isWeekend ? 'not-allowed' : 'pointer',
+                    }}
                   >
                     <div className="text-xs font-medium">{dayName}</div>
-                    <div className="text-lg font-bold mt-1">{dayNum}</div>
+                    <div className="text-base font-bold mt-0.5">{dayNum}</div>
                   </motion.button>
                 );
               })}
             </div>
           </div>
 
-          {/* Time Slots */}
           {selectedDate !== null && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h3 className="text-2xl font-semibold mb-4 flex items-center gap-2 text-foreground">
-                <Clock className="w-6 h-6 text-primary" />
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-white">
+                <Clock className="w-5 h-5" style={{ color: '#C4956A' }} />
                 Select a Time
               </h3>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2">
                 {TIME_SLOTS.map((slot, index) => (
                   <motion.button
                     key={index}
-                    whileHover={{ scale: slot.available ? 1.05 : 1 }}
-                    whileTap={{ scale: slot.available ? 0.95 : 1 }}
+                    whileHover={{ scale: slot.available ? 1.03 : 1 }}
                     onClick={() => slot.available && setSelectedTime(slot.time)}
                     disabled={!slot.available}
-                    className={`p-3 rounded-lg border-2 font-medium transition-all ${
-                      !slot.available
-                        ? 'bg-muted/30 text-muted-foreground cursor-not-allowed border-muted'
-                        : selectedTime === slot.time
-                        ? 'bg-primary text-primary-foreground border-primary shadow-lg'
-                        : 'bg-white hover:border-primary border-muted'
-                    }`}
+                    className="p-3 rounded-xl text-sm font-medium transition-all"
+                    style={{
+                      background: selectedTime === slot.time ? 'linear-gradient(135deg, #C4956A, #A67850)' : '#080C14',
+                      border: selectedTime === slot.time ? 'none' : '1px solid #1E2D45',
+                      color: !slot.available ? '#1E2D45' : selectedTime === slot.time ? '#080C14' : '#94A3B8',
+                      cursor: !slot.available ? 'not-allowed' : 'pointer',
+                    }}
                   >
                     {slot.time}
                   </motion.button>
@@ -137,75 +130,56 @@ export function BookingCalendar() {
           )}
         </div>
 
-        {/* Booking Form */}
+        {/* Form */}
         <div>
-          <h3 className="text-2xl font-semibold mb-4 text-foreground">Your Information</h3>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2 text-foreground">
-                Name <span className="text-primary">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 border-2 border-muted rounded-lg focus:border-primary focus:outline-none transition-colors"
-                placeholder="John Doe"
-              />
-            </div>
+          <h3 className="text-lg font-semibold mb-4 text-white">Your Details</h3>
+          <form onSubmit={handleSubmit} className="space-y-3">
+            {[
+              { label: 'Name', key: 'name', type: 'text', placeholder: 'Your name', required: true },
+              { label: 'Email', key: 'email', type: 'email', placeholder: 'you@company.com', required: true },
+              { label: 'Company', key: 'company', type: 'text', placeholder: 'Your company', required: false },
+            ].map(({ label, key, type, placeholder, required }) => (
+              <div key={key}>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>
+                  {label} {required && <span style={{ color: '#C4956A' }}>*</span>}
+                </label>
+                <input
+                  type={type}
+                  required={required}
+                  value={formData[key as keyof typeof formData]}
+                  onChange={(e) => setFormData({ ...formData, [key]: e.target.value })}
+                  placeholder={placeholder}
+                  style={inputStyle}
+                />
+              </div>
+            ))}
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-foreground">
-                Email <span className="text-primary">*</span>
-              </label>
-              <input
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-3 border-2 border-muted rounded-lg focus:border-primary focus:outline-none transition-colors"
-                placeholder="john@company.com"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2 text-foreground">Company</label>
-              <input
-                type="text"
-                value={formData.company}
-                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                className="w-full px-4 py-3 border-2 border-muted rounded-lg focus:border-primary focus:outline-none transition-colors"
-                placeholder="Your Company"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2 text-foreground">
-                Service Interested In <span className="text-primary">*</span>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>
+                Service <span style={{ color: '#C4956A' }}>*</span>
               </label>
               <select
                 required
                 value={formData.service}
                 onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                className="w-full px-4 py-3 border-2 border-muted rounded-lg focus:border-primary focus:outline-none transition-colors"
+                style={{ ...inputStyle, appearance: 'none' }}
               >
-                <option value="">Select a service</option>
-                <option value="ai-integration">AI Integration</option>
-                <option value="lead-campaigns">Lead Campaigns</option>
-                <option value="website-optimization">Website Optimization</option>
-                <option value="ads-management">Ads Management (Organic & Non-Organic)</option>
+                <option value="" style={{ background: '#0F1623' }}>Select a service</option>
+                <option value="ai-integration" style={{ background: '#0F1623' }}>AI Integration</option>
+                <option value="lead-campaigns" style={{ background: '#0F1623' }}>Lead Generation</option>
+                <option value="website-optimization" style={{ background: '#0F1623' }}>Website Optimization</option>
+                <option value="ads-management" style={{ background: '#0F1623' }}>Ads Management</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-foreground">Message</label>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>Message</label>
               <textarea
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                rows={4}
-                className="w-full px-4 py-3 border-2 border-muted rounded-lg focus:border-primary focus:outline-none transition-colors resize-none"
+                rows={3}
                 placeholder="Tell us about your project..."
+                style={{ ...inputStyle, resize: 'none' }}
               />
             </div>
 
@@ -214,16 +188,19 @@ export function BookingCalendar() {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={!selectedDate || !selectedTime}
-              className={`w-full py-4 rounded-lg font-semibold transition-all ${
-                selectedDate && selectedTime
-                  ? 'bg-primary text-primary-foreground hover:bg-accent shadow-lg'
-                  : 'bg-muted text-muted-foreground cursor-not-allowed'
-              }`}
+              className="w-full py-3.5 rounded-xl font-semibold text-sm transition-all"
+              style={{
+                background: selectedDate && selectedTime
+                  ? 'linear-gradient(135deg, #C4956A, #A67850)'
+                  : '#1E2D45',
+                color: selectedDate && selectedTime ? '#080C14' : '#64748B',
+                cursor: selectedDate && selectedTime ? 'pointer' : 'not-allowed',
+                boxShadow: selectedDate && selectedTime ? '0 0 20px rgba(196,149,106,0.2)' : 'none',
+              }}
             >
               {isSubmitted ? (
                 <span className="flex items-center justify-center gap-2">
-                  <Check className="w-5 h-5" />
-                  Booking Confirmed!
+                  <Check className="w-4 h-4" /> Booking Confirmed!
                 </span>
               ) : (
                 'Schedule Consultation'
@@ -232,24 +209,6 @@ export function BookingCalendar() {
           </form>
         </div>
       </div>
-
-      {isSubmitted && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-8 p-6 bg-secondary/30 border-2 border-primary rounded-lg"
-        >
-          <div className="flex items-start gap-3">
-            <Check className="w-6 h-6 text-primary mt-1" />
-            <div>
-              <h4 className="font-semibold text-foreground mb-1">Booking Confirmed!</h4>
-              <p className="text-accent">
-                You'll receive a Zoom link at <strong>{formData.email}</strong> shortly. We look forward to speaking with you!
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      )}
     </div>
   );
 }

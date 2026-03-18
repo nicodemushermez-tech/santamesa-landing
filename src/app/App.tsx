@@ -13,79 +13,99 @@ import {
   Mail,
   Phone,
   MapPin,
+  Zap,
+  Shield,
+  BarChart3,
 } from 'lucide-react';
 import { ServiceCard } from './components/service-card';
 import { BookingCalendar } from './components/booking-calendar';
 import { StatsSection } from './components/stats-section';
 import { VideoHero } from './components/video-hero';
-import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import { SEOHead } from './components/seo-head';
 import { ContactForm } from './components/contact-form';
 import { TestimonialsSection } from './components/testimonials-section';
 import { Toaster } from './components/ui/sonner';
 import { PrivacyPolicy } from './pages/privacy-policy';
 import { TermsOfService } from './pages/terms-of-service';
-import logoDark from '/logo-dark.png';
 import logoLight from '/logo-light.png';
+import logoDark from '/logo-dark.png';
 
 const SERVICES = [
   {
     icon: Brain,
     title: 'AI Integration',
-    description: 'Leverage cutting-edge AI technology to automate processes and gain competitive advantages.',
+    description: 'Deploy intelligent automation that works around the clock — from custom chatbots to predictive analytics built into your existing systems.',
     features: [
       'Custom AI model development',
       'Chatbot & virtual assistant integration',
-      'Predictive analytics implementation',
-      'Process automation with AI',
+      'Predictive analytics & reporting',
+      'Workflow automation with AI',
     ],
-    color: '#10A37F', // ChatGPT green
+    color: '#C4956A',
   },
   {
     icon: Target,
-    title: 'Lead Campaigns',
-    description: 'Generate high-quality leads with targeted campaigns that convert prospects into customers.',
+    title: 'Lead Generation',
+    description: 'Multi-channel campaigns engineered to attract and convert high-quality prospects directly into your CRM pipeline.',
     features: [
       'Multi-channel lead generation',
       'Lead scoring & qualification',
-      'CRM integration & management',
+      'GHL CRM integration & automation',
       'Campaign performance tracking',
     ],
-    color: '#1877F2', // Facebook blue
+    color: '#C4956A',
   },
   {
     icon: TrendingUp,
     title: 'Website Optimization',
-    description: 'Maximize your website performance with data-driven optimization strategies.',
+    description: 'Turn your website into a conversion machine with data-backed CRO, technical SEO, and UX improvements that compound over time.',
     features: [
       'Conversion rate optimization (CRO)',
-      'SEO & technical improvements',
-      'Page speed optimization',
+      'SEO & technical performance',
+      'Page speed & Core Web Vitals',
       'User experience enhancement',
     ],
-    color: '#0078D7', // Internet Explorer light blue
+    color: '#C4956A',
   },
   {
     icon: Megaphone,
     title: 'Ads Management',
-    description: 'Drive results with expertly managed organic and paid advertising campaigns.',
+    description: 'Full-funnel paid and organic advertising strategy — from creative to optimization — with a relentless focus on ROI.',
     features: [
-      'Google Ads & Facebook Ads management',
+      'Google Ads & Meta Ads management',
       'Organic social media growth',
-      'Retargeting campaigns',
+      'Retargeting & lookalike campaigns',
       'ROI-focused ad optimization',
     ],
-    color: '#EA4335', // Google Chrome orange/red
+    color: '#C4956A',
   },
 ];
 
 const BENEFITS = [
-  'Data-driven strategies backed by analytics',
-  'Transparent reporting and communication',
-  'Proven track record of success',
-  'Customized solutions for your business',
-  'Ongoing optimization and support',
-  'Latest tools and technologies',
+  'Data-driven strategies backed by real analytics',
+  'Transparent reporting — you always know what\'s happening',
+  'Proven track record with measurable results',
+  'Customised solutions, not cookie-cutter packages',
+  'AI-powered tools that give you an unfair advantage',
+  'Ongoing optimization, not set-and-forget',
+];
+
+const DIFFERENTIATORS = [
+  {
+    icon: Zap,
+    title: 'AI-First Approach',
+    description: 'We don\'t just talk about AI — we build it into everything we do, from lead follow-up to campaign optimization.',
+  },
+  {
+    icon: BarChart3,
+    title: 'Results Obsessed',
+    description: 'Every decision is backed by data. We track, report, and optimize until the numbers move in your direction.',
+  },
+  {
+    icon: Shield,
+    title: 'Boutique, Not Agency',
+    description: 'You work directly with senior strategists — no junior handoffs, no bloated teams. Just focused expertise.',
+  },
 ];
 
 function App() {
@@ -95,193 +115,213 @@ function App() {
   const [showTerms, setShowTerms] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
+  };
+
+  const navLinkStyle = {
+    color: isScrolled ? '#94A3B8' : 'rgba(248,250,252,0.75)',
   };
 
   return (
     <HelmetProvider>
       <SEOHead />
       <Toaster position="top-right" richColors />
-      <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
-        {/* Video Hero */}
+      <div className="min-h-screen" style={{ background: '#080C14' }}>
+
+        {/* VIDEO HERO */}
         <VideoHero />
 
-        {/* Navigation */}
+        {/* NAV */}
         <motion.nav
           initial={{ y: -100 }}
           animate={{ y: 0 }}
-          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-            isScrolled ? 'bg-background shadow-lg' : 'bg-transparent'
-          }`}
+          className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+          style={{
+            background: isScrolled ? 'rgba(8,12,20,0.95)' : 'transparent',
+            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+            borderBottom: isScrolled ? '1px solid #1E2D45' : '1px solid transparent',
+          }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.03 }}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="cursor-pointer"
                 aria-label="Scroll to top"
               >
                 <img
-                  src={logoLight}
-                  alt="Santa Mesa Logo"
-                  className="h-24 w-auto transition-all duration-300"
+                  src={isScrolled ? logoLight : logoDark}
+                  alt="Santa Mesa"
+                  className="h-20 w-auto transition-all duration-300"
                   style={isScrolled ? {} : { filter: 'brightness(0) invert(1)' }}
                 />
               </motion.button>
 
-              {/* Desktop Navigation */}
+              {/* Desktop nav */}
               <div className="hidden md:flex items-center gap-8">
-                <button
-                  onClick={() => scrollToSection('services')}
-                  className={`transition-colors ${
-                    isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-secondary'
-                  }`}
-                >
-                  Services
-                </button>
-                <button
-                  onClick={() => scrollToSection('about')}
-                  className={`transition-colors ${
-                    isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-secondary'
-                  }`}
-                >
-                  Why Choose Us
-                </button>
-                <button
+                {['services', 'about', 'booking'].map((id) => (
+                  <button
+                    key={id}
+                    onClick={() => scrollToSection(id)}
+                    className="text-sm font-medium tracking-wide capitalize transition-colors hover:text-white"
+                    style={navLinkStyle}
+                  >
+                    {id === 'about' ? 'Why Us' : id.charAt(0).toUpperCase() + id.slice(1)}
+                  </button>
+                ))}
+                <motion.button
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
                   onClick={() => scrollToSection('booking')}
-                  className="px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-accent transition-colors"
+                  className="px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all"
+                  style={{
+                    background: 'linear-gradient(135deg, #C4956A, #A67850)',
+                    color: '#080C14',
+                    boxShadow: '0 0 20px rgba(196,149,106,0.25)',
+                  }}
                 >
                   Book a Call
-                </button>
+                </motion.button>
               </div>
 
-              {/* Mobile Menu Button */}
+              {/* Mobile menu btn */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`md:hidden p-2 ${isScrolled ? 'text-foreground' : 'text-white'}`}
+                className="md:hidden p-2 text-white"
               >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
 
-            {/* Mobile Navigation */}
+            {/* Mobile menu */}
             {isMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="md:hidden py-4 space-y-4"
+                className="md:hidden py-4 space-y-1 border-t"
+                style={{ borderColor: '#1E2D45' }}
               >
-                <button
-                  onClick={() => scrollToSection('services')}
-                  className="block w-full text-left px-4 py-2 text-foreground hover:bg-secondary rounded-lg"
-                >
-                  Services
-                </button>
-                <button
-                  onClick={() => scrollToSection('about')}
-                  className="block w-full text-left px-4 py-2 text-foreground hover:bg-secondary rounded-lg"
-                >
-                  Why Choose Us
-                </button>
-                <button
-                  onClick={() => scrollToSection('booking')}
-                  className="block w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-accent"
-                >
-                  Book a Call
-                </button>
+                {['services', 'about', 'booking'].map((id) => (
+                  <button
+                    key={id}
+                    onClick={() => scrollToSection(id)}
+                    className="block w-full text-left px-4 py-3 text-sm rounded-lg capitalize transition-colors"
+                    style={{ color: '#94A3B8' }}
+                  >
+                    {id === 'about' ? 'Why Us' : id.charAt(0).toUpperCase() + id.slice(1)}
+                  </button>
+                ))}
+                <div className="px-4 pt-2">
+                  <button
+                    onClick={() => scrollToSection('booking')}
+                    className="w-full py-3 rounded-full text-sm font-semibold"
+                    style={{ background: 'linear-gradient(135deg, #C4956A, #A67850)', color: '#080C14' }}
+                  >
+                    Book a Call
+                  </button>
+                </div>
               </motion.div>
             )}
           </div>
         </motion.nav>
 
-        {/* Hero Section */}
-        <section id="main-content" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        {/* HERO CONTENT (below video) */}
+        <section id="main-content" className="py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#080C14' }}>
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+            {/* Stats */}
+            <div className="mb-24">
+              <StatsSection />
+            </div>
+
+            {/* Main hero content grid */}
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
               >
-                <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight text-foreground">
-                  Transform Your Business with
-                  <span className="text-primary"> AI-Powered </span>
-                  Marketing
-                </h1>
-                <p className="text-xl text-accent mb-8">
-                  Drive growth, optimize campaigns, and maximize ROI with our expert digital marketing and AI integration services.
+                <span className="inline-block mb-4 text-xs font-semibold tracking-widest uppercase" style={{ color: '#C4956A' }}>
+                  Sydney, Australia
+                </span>
+                <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white">
+                  We Build AI Systems That{' '}
+                  <span style={{ color: '#C4956A' }}>Grow Your Business</span>{' '}
+                  While You Sleep
+                </h2>
+                <p className="text-lg leading-relaxed mb-8" style={{ color: '#64748B' }}>
+                  Santa Mesa is a boutique AI + CRM automation agency. We build the systems, run the campaigns, and integrate the technology — so you can focus on closing deals, not chasing leads.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
                     onClick={() => scrollToSection('booking')}
-                    className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-accent transition-colors shadow-lg flex items-center justify-center gap-2"
+                    className="px-8 py-4 rounded-full font-semibold flex items-center justify-center gap-2 transition-all"
+                    style={{
+                      background: 'linear-gradient(135deg, #C4956A, #A67850)',
+                      color: '#080C14',
+                      boxShadow: '0 0 30px rgba(196,149,106,0.25)',
+                    }}
                   >
                     Schedule Free Consultation
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-4 h-4" />
                   </motion.button>
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
                     onClick={() => scrollToSection('services')}
-                    className="px-8 py-4 bg-white border-2 border-primary text-primary rounded-full font-semibold hover:bg-secondary/30 transition-colors"
+                    className="px-8 py-4 rounded-full font-semibold transition-all"
+                    style={{ background: 'transparent', color: '#F8FAFC', border: '1px solid #1E2D45' }}
                   >
                     Explore Services
                   </motion.button>
                 </div>
               </motion.div>
 
+              {/* Differentiators */}
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative"
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="space-y-4"
               >
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                  <ImageWithFallback
-                    src="https://images.unsplash.com/photo-1758518727707-b023e285b709?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MXx8fHwxNzczMTU4OTgzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                    alt="Professional business consultation"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-accent/20 to-transparent" />
-                </div>
-                
-                {/* Floating Stats Card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                  className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl border-2 border-secondary"
-                >
-                  <div className="text-3xl font-bold text-primary mb-1">500+</div>
-                  <div className="text-accent">Happy Clients</div>
-                </motion.div>
+                {DIFFERENTIATORS.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex gap-5 p-6 rounded-2xl"
+                    style={{ background: '#0F1623', border: '1px solid #1E2D45' }}
+                  >
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: 'rgba(196,149,106,0.1)', border: '1px solid rgba(196,149,106,0.2)' }}>
+                      <item.icon className="w-5 h-5" style={{ color: '#C4956A' }} />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-1">{item.title}</h4>
+                      <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>{item.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
-            </div>
-
-            {/* Stats Section */}
-            <div className="mt-24">
-              <StatsSection />
             </div>
           </div>
         </section>
 
-        {/* Services Section */}
-        <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+        {/* SERVICES */}
+        <section id="services" className="py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#080C14', borderTop: '1px solid #1E2D45' }}>
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -290,13 +330,15 @@ function App() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-foreground">Our Services</h2>
-              <p className="text-xl text-accent max-w-3xl mx-auto">
-                Comprehensive digital solutions tailored to accelerate your business growth
+              <span className="inline-block mb-4 text-xs font-semibold tracking-widest uppercase" style={{ color: '#C4956A' }}>
+                What We Do
+              </span>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white">Our Services</h2>
+              <p className="text-lg max-w-2xl mx-auto" style={{ color: '#64748B' }}>
+                End-to-end digital solutions built for scale — from first click to closed deal.
               </p>
             </motion.div>
-
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-6">
               {SERVICES.map((service, index) => (
                 <ServiceCard key={index} {...service} index={index} />
               ))}
@@ -304,21 +346,26 @@ function App() {
           </div>
         </section>
 
-        {/* Why Choose Us Section */}
-        <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
+        {/* WHY US */}
+        <section id="about" className="py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#0F1623', borderTop: '1px solid #1E2D45' }}>
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-foreground">Why Choose Us?</h2>
-                <p className="text-xl text-accent mb-8">
-                  We combine cutting-edge technology with proven marketing strategies to deliver measurable results that matter to your bottom line.
+                <span className="inline-block mb-4 text-xs font-semibold tracking-widest uppercase" style={{ color: '#C4956A' }}>
+                  Why Choose Us
+                </span>
+                <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
+                  We Operate Like a Tech Company,<br />
+                  <span style={{ color: '#C4956A' }}>Not an Agency</span>
+                </h2>
+                <p className="text-lg leading-relaxed mb-8" style={{ color: '#64748B' }}>
+                  Most agencies sell you reports. We build systems. Our AI-powered approach means your marketing gets smarter over time — not just louder.
                 </p>
-                
                 <div className="space-y-4">
                   {BENEFITS.map((benefit, index) => (
                     <motion.div
@@ -326,53 +373,49 @@ function App() {
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      transition={{ duration: 0.4, delay: index * 0.08 }}
                       className="flex items-start gap-3"
                     >
-                      <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                      <span className="text-lg text-foreground">{benefit}</span>
+                      <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#C4956A' }} />
+                      <span className="text-sm leading-relaxed" style={{ color: '#94A3B8' }}>{benefit}</span>
                     </motion.div>
                   ))}
                 </div>
               </motion.div>
 
+              {/* Visual — dark card with glow */}
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="grid grid-cols-2 gap-4"
+                className="relative"
               >
-                <div className="space-y-4">
-                  <div className="rounded-2xl overflow-hidden shadow-lg">
-                    <ImageWithFallback
-                      src="https://images.unsplash.com/photo-1765594938412-62402448a58a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIwcHJvZmVzc2lvbmFsJTIwdGVhbSUyMG1lZXRpbmclMjBzeWRuZXl8ZW58MXx8fHwxNzczMjg2ODQ1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                      alt="Professional team collaboration"
-                      className="w-full h-48 object-cover"
-                    />
-                  </div>
-                  <div className="rounded-2xl overflow-hidden shadow-lg">
-                    <ImageWithFallback
-                      src="https://images.unsplash.com/photo-1758518731468-98e90ffd7430?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHRlYW0lMjBjb2xsYWJvcmF0aW9uJTIwbW9kZXJufGVufDF8fHx8MTc3MzI4Njg0OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                      alt="Business team strategy"
-                      className="w-full h-64 object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-4 mt-8">
-                  <div className="rounded-2xl overflow-hidden shadow-lg">
-                    <ImageWithFallback
-                      src="https://images.unsplash.com/photo-1545005785-a4a5554b8efe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25maWRlbnQlMjBidXNpbmVzcyUyMGxlYWRlcnMlMjBjb3Jwb3JhdGV8ZW58MXx8fHwxNzczMjg2ODQ1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                      alt="Confident business leaders"
-                      className="w-full h-64 object-cover"
-                    />
-                  </div>
-                  <div className="rounded-2xl overflow-hidden shadow-lg">
-                    <ImageWithFallback
-                      src="https://images.unsplash.com/photo-1758518729685-f88df7890776?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxleGVjdXRpdmUlMjB0ZWFtJTIwc3RyYXRlZ2ljJTIwcGxhbm5pbmclMjBvZmZpY2V8ZW58MXx8fHwxNzczMjg2ODQ5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                      alt="Executive team planning"
-                      className="w-full h-48 object-cover"
-                    />
+                <div className="rounded-2xl p-10 relative overflow-hidden"
+                  style={{ background: '#080C14', border: '1px solid #1E2D45' }}>
+                  {/* Glow */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full opacity-20 blur-3xl"
+                    style={{ background: 'radial-gradient(circle, #C4956A, transparent)' }} />
+                  
+                  <div className="relative z-10 text-center">
+                    <div className="text-7xl font-bold mb-2" style={{ color: '#C4956A' }}>3x</div>
+                    <div className="text-xl font-semibold text-white mb-2">Average ROI</div>
+                    <div className="text-sm mb-10" style={{ color: '#64748B' }}>across all client campaigns</div>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      {[
+                        { val: '500+', lbl: 'Clients' },
+                        { val: '95%', lbl: 'Satisfaction' },
+                        { val: '$2M+', lbl: 'Ad Spend Managed' },
+                        { val: '24/7', lbl: 'Support' },
+                      ].map((s, i) => (
+                        <div key={i} className="rounded-xl p-4"
+                          style={{ background: '#0F1623', border: '1px solid #1E2D45' }}>
+                          <div className="text-2xl font-bold text-white">{s.val}</div>
+                          <div className="text-xs" style={{ color: '#64748B' }}>{s.lbl}</div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -380,8 +423,8 @@ function App() {
           </div>
         </section>
 
-        {/* Booking Section */}
-        <section id="booking" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-secondary/30 to-muted/30">
+        {/* BOOKING */}
+        <section id="booking" className="py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#080C14', borderTop: '1px solid #1E2D45' }}>
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -390,9 +433,12 @@ function App() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-foreground">Book Your Free Consultation</h2>
-              <p className="text-xl text-accent max-w-3xl mx-auto">
-                Let's discuss how we can help grow your business. Select a time that works for you, and we'll send you a Zoom link.
+              <span className="inline-block mb-4 text-xs font-semibold tracking-widest uppercase" style={{ color: '#C4956A' }}>
+                Get Started
+              </span>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white">Book Your Free Strategy Call</h2>
+              <p className="text-lg max-w-2xl mx-auto" style={{ color: '#64748B' }}>
+                30 minutes. No pitch, no pressure. We'll audit your current setup and show you exactly where the growth is.
               </p>
             </motion.div>
 
@@ -401,16 +447,15 @@ function App() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
               >
                 <BookingCalendar />
               </motion.div>
-
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <ContactForm />
               </motion.div>
@@ -418,126 +463,97 @@ function App() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
+        {/* TESTIMONIALS */}
         <TestimonialsSection />
 
-        {/* Footer */}
-        <footer className="bg-accent text-white py-12 px-4 sm:px-6 lg:px-8">
+        {/* FOOTER */}
+        <footer className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: '#080C14', borderTop: '1px solid #1E2D45' }}>
           <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div className="grid md:grid-cols-3 gap-12 mb-12">
               <div>
-                <img
-                  src={logoDark}
-                  alt="Santa Mesa"
-                  className="h-24 w-auto mb-4"
-                />
-                <p className="text-muted">
-                  Empowering businesses with AI-driven marketing solutions and expert consultation.
+                <img src={logoDark} alt="Santa Mesa" className="h-20 w-auto mb-5" />
+                <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>
+                  AI-powered marketing and CRM automation for ambitious businesses.
                 </p>
               </div>
-              
+
               <div>
-                <h4 className="font-semibold mb-4">Quick Links</h4>
-                <div className="space-y-2">
-                  <button
-                    onClick={() => scrollToSection('services')}
-                    className="block text-muted hover:text-secondary transition-colors"
-                  >
-                    Services
-                  </button>
-                  <button
-                    onClick={() => scrollToSection('about')}
-                    className="block text-muted hover:text-secondary transition-colors"
-                  >
-                    Why Choose Us
-                  </button>
-                  <button
-                    onClick={() => scrollToSection('booking')}
-                    className="block text-muted hover:text-secondary transition-colors"
-                  >
-                    Book a Call
-                  </button>
+                <h4 className="text-sm font-semibold text-white mb-5 tracking-wide uppercase">Navigation</h4>
+                <div className="space-y-3">
+                  {[['services', 'Services'], ['about', 'Why Choose Us'], ['booking', 'Book a Call']].map(([id, label]) => (
+                    <button
+                      key={id}
+                      onClick={() => scrollToSection(id)}
+                      className="block text-sm transition-colors hover:text-white"
+                      style={{ color: '#64748B' }}
+                    >
+                      {label}
+                    </button>
+                  ))}
                 </div>
               </div>
-              
+
               <div>
-                <h4 className="font-semibold mb-4">Contact</h4>
-                <div className="space-y-3 text-muted">
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-5 h-5" />
-                    <span>hello@santamesa.com</span>
+                <h4 className="text-sm font-semibold text-white mb-5 tracking-wide uppercase">Contact</h4>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 text-sm" style={{ color: '#64748B' }}>
+                    <Mail className="w-4 h-4 flex-shrink-0" style={{ color: '#C4956A' }} />
+                    hello@santamesa.com
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-5 h-5" />
-                    <span>1300 SANTA</span>
+                  <div className="flex items-center gap-3 text-sm" style={{ color: '#64748B' }}>
+                    <Phone className="w-4 h-4 flex-shrink-0" style={{ color: '#C4956A' }} />
+                    1300 SANTA
                   </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5" />
-                    <span>Sydney, Australia</span>
+                  <div className="flex items-center gap-3 text-sm" style={{ color: '#64748B' }}>
+                    <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: '#C4956A' }} />
+                    Sydney, Australia
                   </div>
                 </div>
               </div>
             </div>
-            
-            <div className="border-t border-primary pt-8 text-center text-muted">
-              <div className="flex flex-wrap justify-center gap-4 mb-4">
-                <button 
-                  onClick={() => setShowPrivacy(true)}
-                  className="hover:text-secondary transition-colors text-sm underline"
-                >
+
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8" style={{ borderTop: '1px solid #1E2D45' }}>
+              <p className="text-xs" style={{ color: '#64748B' }}>
+                © 2026 Santa Mesa. All rights reserved.
+              </p>
+              <div className="flex items-center gap-6">
+                <button onClick={() => setShowPrivacy(true)} className="text-xs hover:text-white transition-colors" style={{ color: '#64748B' }}>
                   Privacy Policy
                 </button>
-                <span>|</span>
-                <button 
-                  onClick={() => setShowTerms(true)}
-                  className="hover:text-secondary transition-colors text-sm underline"
-                >
+                <button onClick={() => setShowTerms(true)} className="text-xs hover:text-white transition-colors" style={{ color: '#64748B' }}>
                   Terms of Service
                 </button>
               </div>
-              <p>&copy; 2026 Santa Mesa. All rights reserved.</p>
             </div>
           </div>
         </footer>
 
-        {/* Privacy Policy Modal */}
+        {/* Privacy Modal */}
         {showPrivacy && (
-          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowPrivacy(false)}>
-            <div className="bg-white rounded-lg max-w-4xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-              <div className="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-foreground">Privacy Policy</h2>
-                <button 
-                  onClick={() => setShowPrivacy(false)}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  aria-label="Close privacy policy"
-                >
-                  <X className="w-6 h-6" />
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setShowPrivacy(false)}>
+            <div className="rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto" style={{ background: '#0F1623', border: '1px solid #1E2D45' }} onClick={(e) => e.stopPropagation()}>
+              <div className="sticky top-0 px-6 py-4 flex justify-between items-center" style={{ background: '#0F1623', borderBottom: '1px solid #1E2D45' }}>
+                <h2 className="text-xl font-bold text-white">Privacy Policy</h2>
+                <button onClick={() => setShowPrivacy(false)} className="p-2 rounded-lg transition-colors hover:bg-white/5">
+                  <X className="w-5 h-5 text-white" />
                 </button>
               </div>
-              <div className="p-6">
-                <PrivacyPolicy />
-              </div>
+              <div className="p-6"><PrivacyPolicy /></div>
             </div>
           </div>
         )}
 
-        {/* Terms of Service Modal */}
+        {/* Terms Modal */}
         {showTerms && (
-          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowTerms(false)}>
-            <div className="bg-white rounded-lg max-w-4xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-              <div className="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-foreground">Terms of Service</h2>
-                <button 
-                  onClick={() => setShowTerms(false)}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  aria-label="Close terms of service"
-                >
-                  <X className="w-6 h-6" />
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setShowTerms(false)}>
+            <div className="rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto" style={{ background: '#0F1623', border: '1px solid #1E2D45' }} onClick={(e) => e.stopPropagation()}>
+              <div className="sticky top-0 px-6 py-4 flex justify-between items-center" style={{ background: '#0F1623', borderBottom: '1px solid #1E2D45' }}>
+                <h2 className="text-xl font-bold text-white">Terms of Service</h2>
+                <button onClick={() => setShowTerms(false)} className="p-2 rounded-lg transition-colors hover:bg-white/5">
+                  <X className="w-5 h-5 text-white" />
                 </button>
               </div>
-              <div className="p-6">
-                <TermsOfService />
-              </div>
+              <div className="p-6"><TermsOfService /></div>
             </div>
           </div>
         )}
