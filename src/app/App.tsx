@@ -135,9 +135,10 @@ function App() {
                 aria-label="Scroll to top"
               >
                 <img
-                  src={isScrolled ? logoLight : logoDark}
+                  src={logoLight}
                   alt="Santa Mesa Logo"
                   className="h-24 w-auto transition-all duration-300"
+                  style={isScrolled ? {} : { filter: 'brightness(0) invert(1)' }}
                 />
               </motion.button>
 

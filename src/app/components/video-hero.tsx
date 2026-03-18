@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
-import logoImage from '/logo-dark.png';
+import logoImage from '/logo-light.png';
 
 export function VideoHero() {
   const [videoError, setVideoError] = useState(false);
@@ -85,7 +85,7 @@ export function VideoHero() {
               alt="Santa Mesa - Elevate Your Vision"
               className="h-32 md:h-40 w-auto mx-auto relative z-10"
               style={{ 
-                filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.6))',
+                filter: 'brightness(0) invert(1) drop-shadow(0 8px 24px rgba(0,0,0,0.6))',
               }}
             />
           </div>
