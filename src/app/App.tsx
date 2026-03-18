@@ -25,7 +25,7 @@ import { TestimonialsSection } from './components/testimonials-section';
 import { Toaster } from './components/ui/sonner';
 import { PrivacyPolicy } from './pages/privacy-policy';
 import { TermsOfService } from './pages/terms-of-service';
-import logoImage from 'figma:asset/2c197e6c58af1e5a4982a296dce3547b4f7dd41e.png';
+import logoImage from '/logo.png';
 
 const SERVICES = [
   {

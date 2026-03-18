@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
-import logoImage from 'figma:asset/2c197e6c58af1e5a4982a296dce3547b4f7dd41e.png';
+import logoImage from '/logo.png';
 
 export function VideoHero() {
   const [videoError, setVideoError] = useState(false);
