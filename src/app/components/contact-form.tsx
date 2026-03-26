@@ -65,31 +65,32 @@ export function ContactForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Name */}
-        <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>
-            Name <span style={{ color: '#C4956A' }}>*</span>
-          </label>
-          <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#64748B' }} />
-            <input
-              name="name" type="text" value={formData.name} onChange={handleChange}
-              placeholder="Your full name" required style={inputStyle}
-            />
+        {/* Name + Email row */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>
+              Name <span style={{ color: '#C4956A' }}>*</span>
+            </label>
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#64748B' }} />
+              <input
+                name="name" type="text" value={formData.name} onChange={handleChange}
+                placeholder="Your full name" required style={inputStyle}
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Email */}
-        <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>
-            Email <span style={{ color: '#C4956A' }}>*</span>
-          </label>
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#64748B' }} />
-            <input
-              name="email" type="email" value={formData.email} onChange={handleChange}
-              placeholder="you@company.com" required style={inputStyle}
-            />
+          <div>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: '#64748B' }}>
+              Email <span style={{ color: '#C4956A' }}>*</span>
+            </label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#64748B' }} />
+              <input
+                name="email" type="email" value={formData.email} onChange={handleChange}
+                placeholder="you@company.com" required style={inputStyle}
+              />
+            </div>
           </div>
         </div>
 

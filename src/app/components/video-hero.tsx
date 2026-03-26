@@ -17,10 +17,10 @@ export function VideoHero() {
       {/* Deep dark gradient fallback */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#080C14] via-[#0F1A2E] to-[#080C14]" style={{ zIndex: 1 }} />
 
-      {/* Video */}
+      {/* Video — lazy load after hero paints */}
       {!videoError && (
         <video
-          autoPlay muted loop playsInline preload="auto"
+          autoPlay muted loop playsInline preload="none"
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           style={{ zIndex: 2, willChange: 'transform' }}
           onError={() => setVideoError(true)}

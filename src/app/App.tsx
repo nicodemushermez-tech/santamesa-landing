@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
 import { HelmetProvider } from 'react-helmet-async';
 import {
@@ -18,18 +18,21 @@ import {
   BarChart3,
 } from 'lucide-react';
 import { ServiceCard } from './components/service-card';
-
 import { StatsSection } from './components/stats-section';
 import { VideoHero } from './components/video-hero';
 import { SEOHead } from './components/seo-head';
-import { ContactForm } from './components/contact-form';
-import { TestimonialsSection } from './components/testimonials-section';
 import { Toaster } from './components/ui/sonner';
-import { PrivacyPolicy } from './pages/privacy-policy';
-import { TermsOfService } from './pages/terms-of-service';
-import { ChatWidget } from './components/chat-widget';
-import { CalendlyEmbed } from './components/calendly-embed';
 import logoLight from '/logo-light.png';
+
+// Lazy-load below-fold heavy components
+const ResultsShowcase = lazy(() => import('./components/results-showcase').then(m => ({ default: m.ResultsShowcase })));
+const VoiceDemo = lazy(() => import('./components/voice-demo').then(m => ({ default: m.VoiceDemo })));
+const ContactForm = lazy(() => import('./components/contact-form').then(m => ({ default: m.ContactForm })));
+const TestimonialsSection = lazy(() => import('./components/testimonials-section').then(m => ({ default: m.TestimonialsSection })));
+const ChatWidget = lazy(() => import('./components/chat-widget').then(m => ({ default: m.ChatWidget })));
+const CalendlyEmbed = lazy(() => import('./components/calendly-embed').then(m => ({ default: m.CalendlyEmbed })));
+const PrivacyPolicy = lazy(() => import('./pages/privacy-policy').then(m => ({ default: m.PrivacyPolicy })));
+const TermsOfService = lazy(() => import('./pages/terms-of-service').then(m => ({ default: m.TermsOfService })));
 
 const SERVICES = [
   {
@@ -115,6 +118,11 @@ function App() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
 
+  // Force scroll to top on every fresh page load
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
@@ -167,14 +175,14 @@ function App() {
 
               {/* Desktop nav */}
               <div className="hidden md:flex items-center gap-8">
-                {['services', 'about', 'booking'].map((id) => (
+                {['services', 'results', 'ai-demo', 'about', 'booking'].map((id) => (
                   <button
                     key={id}
                     onClick={() => scrollToSection(id)}
                     className="text-sm font-medium tracking-wide capitalize transition-colors hover:text-white"
                     style={navLinkStyle}
                   >
-                    {id === 'about' ? 'Why Us' : id.charAt(0).toUpperCase() + id.slice(1)}
+                    {id === 'about' ? 'Why Us' : id === 'results' ? 'Results' : id === 'ai-demo' ? 'AI Demo' : id.charAt(0).toUpperCase() + id.slice(1)}
                   </button>
                 ))}
                 <motion.button
@@ -209,14 +217,14 @@ function App() {
                 className="md:hidden py-4 space-y-1 border-t"
                 style={{ borderColor: '#1E2D45' }}
               >
-                {['services', 'about', 'booking'].map((id) => (
+                {['services', 'results', 'ai-demo', 'about', 'booking'].map((id) => (
                   <button
                     key={id}
                     onClick={() => scrollToSection(id)}
                     className="block w-full text-left px-4 py-3 text-sm rounded-lg capitalize transition-colors"
                     style={{ color: '#94A3B8' }}
                   >
-                    {id === 'about' ? 'Why Us' : id.charAt(0).toUpperCase() + id.slice(1)}
+                    {id === 'about' ? 'Why Us' : id === 'results' ? 'Results' : id === 'ai-demo' ? 'AI Demo' : id.charAt(0).toUpperCase() + id.slice(1)}
                   </button>
                 ))}
                 <div className="px-4 pt-2">
@@ -234,7 +242,7 @@ function App() {
         </motion.nav>
 
         {/* HERO CONTENT (below video) */}
-        <section id="main-content" className="py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#080C14' }}>
+        <section id="main-content" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#080C14' }}>
           <div className="max-w-7xl mx-auto">
 
             {/* Stats */}
@@ -347,6 +355,24 @@ function App() {
           </div>
         </section>
 
+        {/* RESULTS SHOWCASE */}
+        <section id="results" className="py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#0F1623', borderTop: '1px solid #1E2D45' }}>
+          <div className="max-w-7xl mx-auto">
+            <Suspense fallback={<div style={{ height: '600px', background: '#0F1623' }} />}>
+              <ResultsShowcase />
+            </Suspense>
+          </div>
+        </section>
+
+        {/* AI VOICE DEMO */}
+        <section id="ai-demo" className="py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#080C14', borderTop: '1px solid #1E2D45' }}>
+          <div className="max-w-7xl mx-auto">
+            <Suspense fallback={<div style={{ height: '800px', background: '#080C14' }} />}>
+              <VoiceDemo />
+            </Suspense>
+          </div>
+        </section>
+
         {/* WHY US */}
         <section id="about" className="py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#0F1623', borderTop: '1px solid #1E2D45' }}>
           <div className="max-w-7xl mx-auto">
@@ -450,7 +476,9 @@ function App() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-8"
             >
-              <CalendlyEmbed />
+              <Suspense fallback={<div style={{ height: '320px', background: '#080C14' }} />}>
+                <CalendlyEmbed />
+              </Suspense>
             </motion.div>
 
             <motion.div
@@ -458,15 +486,19 @@ function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="max-w-2xl mx-auto w-full"
+              className="max-w-4xl mx-auto w-full"
             >
-              <ContactForm />
+              <Suspense fallback={<div style={{ height: '480px', background: '#080C14' }} />}>
+                <ContactForm />
+              </Suspense>
             </motion.div>
           </div>
         </section>
 
         {/* TESTIMONIALS */}
-        <TestimonialsSection />
+        <Suspense fallback={<div style={{ height: '500px', background: '#080C14' }} />}>
+          <TestimonialsSection />
+        </Suspense>
 
         {/* FOOTER */}
         <footer className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: '#080C14', borderTop: '1px solid #1E2D45' }}>
@@ -540,13 +572,15 @@ function App() {
                   <X className="w-5 h-5 text-white" />
                 </button>
               </div>
-              <div className="p-6"><PrivacyPolicy /></div>
+              <div className="p-6"><Suspense fallback={null}><PrivacyPolicy /></Suspense></div>
             </div>
           </div>
         )}
 
         {/* Chat Widget */}
-        <ChatWidget />
+        <Suspense fallback={null}>
+          <ChatWidget />
+        </Suspense>
 
         {/* Terms Modal */}
         {showTerms && (
@@ -558,7 +592,7 @@ function App() {
                   <X className="w-5 h-5 text-white" />
                 </button>
               </div>
-              <div className="p-6"><TermsOfService /></div>
+              <div className="p-6"><Suspense fallback={null}><TermsOfService /></Suspense></div>
             </div>
           </div>
         )}

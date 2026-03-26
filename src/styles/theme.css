@@ -78,6 +78,12 @@
   html {
     font-size: var(--font-size);
     scroll-behavior: smooth;
+    overflow-anchor: none;
+  }
+
+  /* Prevent scroll anchoring from hijacking position during lazy load */
+  #root {
+    overflow-anchor: none;
   }
 
   h1 { font-size: var(--text-2xl); font-weight: 700; line-height: 1.15; }
