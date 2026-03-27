@@ -88,7 +88,7 @@ export function PrivacyPolicy() {
             </p>
             <div className="bg-muted p-6 rounded-lg">
               <p className="text-accent mb-2"><strong>Email:</strong> privacy@santamesa.com.au</p>
-              <p className="text-accent mb-2"><strong>Phone:</strong> 1300 SANTA (1300 726 821)</p>
+
               <p className="text-accent"><strong>Location:</strong> Sydney, NSW, Australia</p>
             </div>
           </section>

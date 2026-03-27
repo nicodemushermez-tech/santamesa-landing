@@ -11,7 +11,7 @@ export function SEOHead({
   title = 'Santa Mesa - Elevate Your Vision | AI Integration, Lead Campaigns & Website Optimization',
   description = 'Sydney-based consulting services specializing in AI integration, lead campaigns, website optimization, and ads management. Transform your business with data-driven strategies. Book a consultation today.',
   image = 'https://images.unsplash.com/photo-1558403194-611308249627?w=1200&h=630&fit=crop',
-  url = 'https://santamesa-landing.vercel.app',
+  url = 'https://santamesa.dev',
 }: SEOHeadProps) {
   return (
     <Helmet>
@@ -56,7 +56,7 @@ export function SEOHead({
           image: image,
           '@id': url,
           url: url,
-          telephone: '1300-726-821',
+          email: 'hello@santamesa.dev',
           address: {
             '@type': 'PostalAddress',
             addressLocality: 'Sydney',

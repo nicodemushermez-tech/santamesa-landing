@@ -11,7 +11,6 @@ import {
   Menu,
   X,
   Mail,
-  Phone,
   MapPin,
   Zap,
   Shield,
@@ -604,10 +603,6 @@ function App() {
                   <div className="flex items-center gap-3 text-sm" style={{ color: '#64748B' }}>
                     <Mail className="w-4 h-4 flex-shrink-0" style={{ color: '#C4956A' }} />
                     hello@santamesa.com
-                  </div>
-                  <div className="flex items-center gap-3 text-sm" style={{ color: '#64748B' }}>
-                    <Phone className="w-4 h-4 flex-shrink-0" style={{ color: '#C4956A' }} />
-                    1300 SANTA
                   </div>
                   <div className="flex items-center gap-3 text-sm" style={{ color: '#64748B' }}>
                     <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: '#C4956A' }} />
