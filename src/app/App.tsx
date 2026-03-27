@@ -117,6 +117,8 @@ function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const [stickyBarDismissed, setStickyBarDismissed] = useState(false);
 
   // Force scroll to top on every fresh page load
   useEffect(() => {
@@ -124,7 +126,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+      setShowStickyBar(window.scrollY > 600);
+    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -241,6 +246,41 @@ function App() {
           </div>
         </motion.nav>
 
+        {/* STICKY BOTTOM CTA BAR */}
+        {showStickyBar && !stickyBarDismissed && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            className="fixed bottom-0 left-0 right-0 z-40 px-4 py-3 flex items-center justify-between gap-4"
+            style={{ background: 'rgba(8,12,20,0.97)', borderTop: '1px solid #1E2D45', backdropFilter: 'blur(12px)' }}
+          >
+            <div className="hidden sm:flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#C4956A' }} />
+              <span className="text-sm font-medium text-white">Ready to grow? Book your free 30-min strategy call.</span>
+            </div>
+            <div className="flex items-center gap-3 w-full sm:w-auto">
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => scrollToSection('booking')}
+                className="flex-1 sm:flex-none px-6 py-2.5 rounded-full text-sm font-semibold flex items-center justify-center gap-2"
+                style={{ background: 'linear-gradient(135deg, #C4956A, #A67850)', color: '#080C14' }}
+              >
+                Book a Free Call <ArrowRight className="w-3.5 h-3.5" />
+              </motion.button>
+              <button
+                onClick={() => setStickyBarDismissed(true)}
+                className="p-1.5 rounded-full transition-colors"
+                style={{ color: '#64748B' }}
+                aria-label="Dismiss"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+
         {/* HERO CONTENT (below video) */}
         <section id="main-content" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ background: '#080C14' }}>
           <div className="max-w-7xl mx-auto">
@@ -352,6 +392,37 @@ function App() {
                 <ServiceCard key={index} {...service} index={index} />
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* MID-PAGE HOOK BANNER */}
+        <section className="py-14 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(135deg, rgba(196,149,106,0.08), rgba(196,149,106,0.03))', borderTop: '1px solid rgba(196,149,106,0.15)', borderBottom: '1px solid rgba(196,149,106,0.15)' }}>
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: '#C4956A' }}>Limited Spots This Month</p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                Most businesses are leaving money on the table.<br />
+                <span style={{ color: '#C4956A' }}>Is yours one of them?</span>
+              </h3>
+              <p className="text-base mb-8 max-w-xl mx-auto" style={{ color: '#64748B' }}>
+                In 30 minutes we'll show you exactly where your leads are leaking and what it would take to fix it — for free.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.04, boxShadow: '0 0 40px rgba(196,149,106,0.35)' }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => scrollToSection('booking')}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm"
+                style={{ background: 'linear-gradient(135deg, #C4956A, #A67850)', color: '#080C14' }}
+              >
+                Claim My Free Strategy Call <ArrowRight className="w-4 h-4" />
+              </motion.button>
+              <p className="text-xs mt-4" style={{ color: '#334155' }}>No obligation. No pitch. Just clarity.</p>
+            </motion.div>
           </div>
         </section>
 
