@@ -15,6 +15,9 @@ export function SEOHead({
 }: SEOHeadProps) {
   return (
     <Helmet>
+      {/* Google Search Console Verification */}
+      <meta name="google-site-verification" content="F60Ktz9wRtQ9jPuoxBZc4IlufLatFBMDdt5UHw7fofQ" />
+
       {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="title" content={title} />
