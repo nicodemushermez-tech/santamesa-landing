@@ -183,19 +183,20 @@ function App() {
                   href="https://dreambuilds.com.au"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05, borderColor: 'rgba(200,241,53,0.4)' }}
-                  className="group flex flex-col items-start gap-1 px-4 py-2 rounded-xl cursor-pointer transition-all"
+                  whileHover={{ scale: 1.03, borderColor: 'rgba(200,241,53,0.5)' }}
+                  className="flex items-center gap-4 px-6 py-1.5 rounded-xl cursor-pointer transition-all"
                   style={{
                     background: 'rgba(8,12,20,0.7)',
                     backdropFilter: 'blur(12px)',
                     border: '1px solid rgba(255,255,255,0.1)',
+                    minWidth: '200px',
                   }}
                   title="Visit DreamBuilds"
                 >
-                  <span className="text-[9px] font-semibold tracking-widest uppercase transition-colors" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                  <span className="text-[9px] font-semibold tracking-widest uppercase whitespace-nowrap" style={{ color: 'rgba(255,255,255,0.35)' }}>
                     Built by ↗
                   </span>
-                  <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '22px', width: 'auto' }} />
+                  <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '20px', width: 'auto' }} />
                 </motion.a>
               </div>
 
