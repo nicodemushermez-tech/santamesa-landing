@@ -183,19 +183,23 @@ function App() {
                   href="https://dreambuilds.com.au"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.03, borderColor: 'rgba(200,241,53,0.5)' }}
-                  className="flex items-center gap-4 px-6 py-1.5 rounded-xl cursor-pointer transition-all"
+                  whileHover={{ scale: 1.03, boxShadow: '0 0 20px rgba(200,241,53,0.12)', borderColor: 'rgba(200,241,53,0.3)' }}
+                  className="flex items-center gap-3 px-5 py-2 rounded-2xl cursor-pointer transition-all"
                   style={{
-                    background: 'rgba(8,12,20,0.7)',
-                    backdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    minWidth: '200px',
+                    background: 'rgba(8,12,20,0.75)',
+                    backdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(255,255,255,0.08)',
                   }}
-                  title="Visit DreamBuilds"
                 >
-                  <span className="text-[9px] font-semibold tracking-widest uppercase whitespace-nowrap" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                    Built by ↗
-                  </span>
+                  {/* Santa Mesa wordmark */}
+                  <img
+                    src={logoLight}
+                    alt="Santa Mesa"
+                    style={{ height: '20px', width: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.9 }}
+                  />
+                  {/* × separator */}
+                  <span className="font-light select-none" style={{ color: 'rgba(255,255,255,0.25)', fontSize: '16px' }}>×</span>
+                  {/* DreamBuilds logo */}
                   <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '20px', width: 'auto' }} />
                 </motion.a>
               </div>
