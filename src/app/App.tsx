@@ -164,18 +164,40 @@ function App() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                aria-label="Scroll to top"
-              >
-                <img
-                  src={logoLight}
-                  alt="Santa Mesa"
-                  className="h-24 w-auto transition-all duration-300"
-                  style={isScrolled ? {} : { filter: 'brightness(0) invert(1)' }}
-                />
-              </motion.button>
+              <div className="flex items-center gap-3">
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  aria-label="Scroll to top"
+                >
+                  <img
+                    src={logoLight}
+                    alt="Santa Mesa"
+                    className="h-24 w-auto transition-all duration-300"
+                    style={isScrolled ? {} : { filter: 'brightness(0) invert(1)' }}
+                  />
+                </motion.button>
+
+                {/* DreamBuilds collab badge */}
+                <motion.a
+                  href="https://dreambuilds.com.au"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, borderColor: 'rgba(200,241,53,0.4)' }}
+                  className="group flex flex-col items-start gap-1 px-4 py-2 rounded-xl cursor-pointer transition-all"
+                  style={{
+                    background: 'rgba(8,12,20,0.7)',
+                    backdropFilter: 'blur(12px)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                  }}
+                  title="Visit DreamBuilds"
+                >
+                  <span className="text-[9px] font-semibold tracking-widest uppercase transition-colors" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                    Built by ↗
+                  </span>
+                  <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '22px', width: 'auto' }} />
+                </motion.a>
+              </div>
 
               {/* Desktop nav */}
               <div className="hidden md:flex items-center gap-8">

@@ -65,33 +65,15 @@ export function VideoHero() {
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-10 flex items-center justify-center gap-5"
+            className="mb-10 flex items-center justify-center"
           >
             <img
               src={logoImage}
               alt="Santa Mesa"
-              className="h-40 md:h-52 w-auto"
+              className="h-40 md:h-52 w-auto mx-auto"
               style={{ filter: 'brightness(0) invert(1)' }}
             />
-            {/* DreamBuilds badge — inline right of logo */}
-            <motion.a
-              href="https://dreambuilds.com.au"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              whileHover={{ scale: 1.04 }}
-              className="flex flex-col items-start gap-1.5 px-4 py-3 rounded-2xl self-center"
-              style={{
-                background: 'rgba(8,12,20,0.75)',
-                backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255,255,255,0.08)',
-              }}
-            >
-              <span className="text-[10px] font-medium tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.4)' }}>Built by</span>
-              <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '32px', width: 'auto' }} />
-            </motion.a>
+
           </motion.div>
 
           {/* Eyebrow */}
