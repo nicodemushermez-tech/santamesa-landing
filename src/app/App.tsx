@@ -245,6 +245,17 @@ function App() {
           </div>
         </motion.nav>
 
+        {/* DREAMBUILDS CREDIT BANNER */}
+        <div
+          className="w-full flex items-center justify-center gap-2 py-2 px-4 text-xs"
+          style={{ background: '#0a0f1a', borderBottom: '1px solid #1E2D45' }}
+        >
+          <span style={{ color: '#475569' }}>Website designed & built by</span>
+          <a href="https://dreambuilds.com.au" target="_blank" rel="noopener noreferrer" className="flex items-center">
+            <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '18px', width: 'auto' }} />
+          </a>
+        </div>
+
         {/* STICKY BOTTOM CTA BAR */}
         {showStickyBar && !stickyBarDismissed && (
           <motion.div
@@ -625,6 +636,12 @@ function App() {
                 </button>
               </div>
             </div>
+          </div>
+          <div className="flex items-center justify-center gap-2 py-3" style={{ borderTop: '1px solid #1E2D45' }}>
+            <span className="text-xs" style={{ color: '#334155' }}>Designed & built by</span>
+            <a href="https://dreambuilds.com.au" target="_blank" rel="noopener noreferrer">
+              <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '16px', width: 'auto' }} />
+            </a>
           </div>
         </footer>
 
