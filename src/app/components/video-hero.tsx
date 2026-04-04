@@ -53,6 +53,28 @@ export function VideoHero() {
         }}
       />
 
+      {/* DreamBuilds collab badge — top left */}
+      <motion.a
+        href="https://dreambuilds.com.au"
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="absolute top-6 left-6 flex items-center gap-3 px-4 py-2.5 rounded-2xl z-20"
+        style={{
+          background: 'rgba(8,12,20,0.75)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(255,255,255,0.08)',
+        }}
+        whileHover={{ scale: 1.04 }}
+      >
+        <div className="flex flex-col" style={{ lineHeight: 1 }}>
+          <span className="text-[10px] font-medium tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.4)' }}>Built by</span>
+        </div>
+        <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '28px', width: 'auto' }} />
+      </motion.a>
+
       {/* Content */}
       <div className="relative h-full flex flex-col items-center justify-center px-4 text-center" style={{ zIndex: 10 }}>
         <motion.div
