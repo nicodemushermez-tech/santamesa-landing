@@ -191,16 +191,12 @@ function App() {
                     border: '1px solid rgba(255,255,255,0.08)',
                   }}
                 >
-                  {/* Santa Mesa wordmark */}
-                  <img
-                    src={logoLight}
-                    alt="Santa Mesa"
-                    style={{ height: '20px', width: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.9 }}
-                  />
+                  {/* Santa Mesa name */}
+                  <span className="font-bold tracking-tight text-sm whitespace-nowrap" style={{ color: '#C4956A', letterSpacing: '-0.3px' }}>Santa Mesa</span>
                   {/* × separator */}
-                  <span className="font-light select-none" style={{ color: 'rgba(255,255,255,0.25)', fontSize: '16px' }}>×</span>
+                  <span className="font-light select-none" style={{ color: 'rgba(255,255,255,0.2)', fontSize: '18px', lineHeight: 1 }}>×</span>
                   {/* DreamBuilds logo */}
-                  <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '20px', width: 'auto' }} />
+                  <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '22px', width: 'auto' }} />
                 </motion.a>
               </div>
 
