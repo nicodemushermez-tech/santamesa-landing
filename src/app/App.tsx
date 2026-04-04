@@ -191,11 +191,7 @@ function App() {
                     border: '1px solid rgba(255,255,255,0.08)',
                   }}
                 >
-                  {/* Santa Mesa name */}
-                  <span className="font-bold tracking-tight text-sm whitespace-nowrap" style={{ color: '#C4956A', letterSpacing: '-0.3px' }}>Santa Mesa</span>
-                  {/* × separator */}
-                  <span className="font-light select-none" style={{ color: 'rgba(255,255,255,0.2)', fontSize: '18px', lineHeight: 1 }}>×</span>
-                  {/* DreamBuilds logo */}
+                  <span className="text-xs font-medium whitespace-nowrap" style={{ color: 'rgba(255,255,255,0.6)' }}>Created by</span>
                   <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '22px', width: 'auto' }} />
                 </motion.a>
               </div>
