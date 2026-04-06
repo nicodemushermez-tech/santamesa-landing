@@ -86,7 +86,7 @@ export function VideoHero() {
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium tracking-widest uppercase"
               style={{ background: 'rgba(196,149,106,0.12)', color: '#C4956A', border: '1px solid rgba(196,149,106,0.3)' }}>
               <span className="w-1.5 h-1.5 rounded-full bg-[#C4956A] animate-pulse" />
-              AI-Powered Growth Agency
+              For Busy Business Owners — Sydney
             </span>
           </motion.div>
 
@@ -97,8 +97,8 @@ export function VideoHero() {
             transition={{ duration: 0.9, delay: 0.8 }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] tracking-tight"
           >
-            Elevate Your{' '}
-            <span style={{ color: '#C4956A' }}>Vision</span>
+            More Clients.{' '}
+            <span style={{ color: '#C4956A' }}>Less Chaos.</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -109,7 +109,7 @@ export function VideoHero() {
             className="text-lg md:text-2xl font-light tracking-wide mb-10 max-w-2xl mx-auto"
             style={{ color: 'rgba(248,250,252,0.65)' }}
           >
-            Where Innovation Meets Growth
+            You didn't start a business to drown in admin, chase leads, and figure out tech. We handle all of it — so you can get back to doing what you're good at.
           </motion.p>
 
           {/* CTAs */}
@@ -130,7 +130,7 @@ export function VideoHero() {
                 boxShadow: '0 0 30px rgba(196,149,106,0.35)',
               }}
             >
-              Book a Free Strategy Call
+              Get My Free Growth Plan
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.04 }}
@@ -143,7 +143,7 @@ export function VideoHero() {
                 border: '1px solid rgba(248,250,252,0.25)',
               }}
             >
-              See What We Do
+              How It Works
             </motion.button>
           </motion.div>
         </motion.div>

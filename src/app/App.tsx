@@ -320,12 +320,11 @@ function App() {
                   Sydney, Australia
                 </span>
                 <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white">
-                  We Build AI Systems That{' '}
-                  <span style={{ color: '#C4956A' }}>Grow Your Business</span>{' '}
-                  While You Sleep
+                  Stop Wearing Every Hat.{' '}
+                  <span style={{ color: '#C4956A' }}>Let Us Handle the Growth.</span>
                 </h2>
                 <p className="text-lg leading-relaxed mb-8" style={{ color: '#64748B' }}>
-                  Santa Mesa is a boutique AI + CRM automation agency. We build the systems, run the campaigns, and integrate the technology — so you can focus on closing deals, not chasing leads.
+                  Santa Mesa works with local business owners who are brilliant at what they do — but stretched too thin to market it properly. We bring in the leads, automate the follow-up, and build the systems so your business grows without you burning out.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <motion.button
@@ -339,7 +338,7 @@ function App() {
                       boxShadow: '0 0 30px rgba(196,149,106,0.25)',
                     }}
                   >
-                    Schedule Free Consultation
+                    Book My Free Strategy Call
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
                   <motion.button
@@ -422,13 +421,13 @@ function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: '#C4956A' }}>Limited Spots This Month</p>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: '#C4956A' }}>Sound Familiar?</p>
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-                Most businesses are leaving money on the table.<br />
-                <span style={{ color: '#C4956A' }}>Is yours one of them?</span>
+                You're great at your business.<br />
+                <span style={{ color: '#C4956A' }}>The marketing? Not so much.</span>
               </h3>
               <p className="text-base mb-8 max-w-xl mx-auto" style={{ color: '#64748B' }}>
-                In 30 minutes we'll show you exactly where your leads are leaking and what it would take to fix it — for free.
+                Most small business owners are losing leads every week because they don't have the time or tools to follow up. We fix that in 30 days.
               </p>
               <motion.button
                 whileHover={{ scale: 1.04, boxShadow: '0 0 40px rgba(196,149,106,0.35)' }}
@@ -437,9 +436,9 @@ function App() {
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm"
                 style={{ background: 'linear-gradient(135deg, #C4956A, #A67850)', color: '#080C14' }}
               >
-                Claim My Free Strategy Call <ArrowRight className="w-4 h-4" />
+                Show Me How <ArrowRight className="w-4 h-4" />
               </motion.button>
-              <p className="text-xs mt-4" style={{ color: '#334155' }}>No obligation. No pitch. Just clarity.</p>
+              <p className="text-xs mt-4" style={{ color: '#334155' }}>Free 30-min call. No obligation. No pitch.</p>
             </motion.div>
           </div>
         </section>
