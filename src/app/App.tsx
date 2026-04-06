@@ -15,7 +15,10 @@ import {
   Zap,
   Shield,
   BarChart3,
+  Sun,
+  Moon,
 } from 'lucide-react';
+import { ThemeProvider, useTheme } from './context/theme-context';
 import { ServiceCard } from './components/service-card';
 import { StatsSection } from './components/stats-section';
 import { VideoHero } from './components/video-hero';
@@ -111,7 +114,8 @@ const DIFFERENTIATORS = [
   },
 ];
 
-function App() {
+function AppInner() {
+  const { theme, toggle } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -208,6 +212,22 @@ function App() {
                     {id === 'about' ? 'Why Us' : id === 'results' ? 'Results' : id === 'ai-demo' ? 'AI Demo' : id.charAt(0).toUpperCase() + id.slice(1)}
                   </button>
                 ))}
+                {/* Theme toggle */}
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={toggle}
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all"
+                  style={{
+                    background: theme === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)',
+                    border: theme === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.12)',
+                    color: theme === 'dark' ? '#94A3B8' : '#475569',
+                  }}
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </motion.button>
+
                 <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
@@ -691,4 +711,10 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppInner />
+    </ThemeProvider>
+  );
+}

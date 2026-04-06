@@ -1,5 +1,26 @@
 @custom-variant dark (&:is(.dark *));
 
+/* Light mode overrides */
+html.light {
+  --background: #F5F0EA;
+  --foreground: #0F1117;
+  --card: #FFFFFF;
+  --card-foreground: #0F1117;
+  --border: #E2D9CF;
+  --muted: #F0EBE3;
+  --muted-foreground: #6B7280;
+  --secondary: #E8DDD3;
+  --secondary-foreground: #0F1117;
+}
+
+html.light body {
+  background: #F5F0EA;
+  color: #0F1117;
+}
+
+html.light ::-webkit-scrollbar-track { background: #F5F0EA; }
+html.light ::-webkit-scrollbar-thumb { background: #C4956A60; }
+
 :root {
   --font-size: 16px;
 
