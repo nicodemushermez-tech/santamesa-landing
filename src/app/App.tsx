@@ -652,7 +652,16 @@ function AppInner() {
 
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8" style={{ borderTop: '1px solid #1E2D45' }}>
               <p className="text-xs" style={{ color: '#64748B' }}>
-                © 2026 Santa Mesa. All rights reserved.
+                © 2026 Santa Mesa. All rights reserved. · Built by{' '}
+                <a
+                  href="https://dreambuilds.com.au"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium transition-colors hover:text-white"
+                  style={{ color: '#C4956A' }}
+                >
+                  Dream Builds
+                </a>
               </p>
               <div className="flex items-center gap-6">
                 <button onClick={() => setShowPrivacy(true)} className="text-xs hover:text-white transition-colors" style={{ color: '#64748B' }}>
@@ -663,24 +672,6 @@ function AppInner() {
                 </button>
               </div>
             </div>
-          </div>
-          <div className="flex items-center justify-center gap-4 py-4" style={{ borderTop: '1px solid #1E2D45' }}>
-            <a href="https://dreambuilds.com.au" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80">
-              <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '26px', width: 'auto' }} />
-            </a>
-            <span style={{ color: '#1E2D45' }}>|</span>
-            <span className="text-sm" style={{ color: '#475569' }}>
-              Built by{' '}
-              <a
-                href="https://dreambuilds.com.au"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold transition-colors hover:text-white"
-                style={{ color: '#C4956A' }}
-              >
-                Dream Builds
-              </a>
-            </span>
           </div>
         </footer>
 
