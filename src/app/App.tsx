@@ -664,7 +664,11 @@ function AppInner() {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center py-4" style={{ borderTop: '1px solid #1E2D45' }}>
+          <div className="flex items-center justify-center gap-4 py-4" style={{ borderTop: '1px solid #1E2D45' }}>
+            <a href="https://dreambuilds.com.au" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80">
+              <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '26px', width: 'auto' }} />
+            </a>
+            <span style={{ color: '#1E2D45' }}>|</span>
             <span className="text-sm" style={{ color: '#475569' }}>
               Built by{' '}
               <a
