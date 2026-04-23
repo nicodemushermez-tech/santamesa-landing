@@ -19,6 +19,7 @@ import {
   Moon,
 } from 'lucide-react';
 import { ThemeProvider, useTheme } from './context/theme-context';
+import { Link } from 'react-router-dom';
 import { ServiceCard } from './components/service-card';
 import { StatsSection } from './components/stats-section';
 import { VideoHero } from './components/video-hero';
@@ -212,6 +213,13 @@ function AppInner() {
                     {id === 'about' ? 'Why Us' : id === 'results' ? 'Results' : id === 'ai-demo' ? 'AI Demo' : id.charAt(0).toUpperCase() + id.slice(1)}
                   </button>
                 ))}
+                <Link
+                  to="/blog"
+                  className="text-sm font-medium tracking-wide transition-colors hover:text-white"
+                  style={navLinkStyle}
+                >
+                  Blog
+                </Link>
                 {/* Theme toggle */}
                 <motion.button
                   whileHover={{ scale: 1.1 }}
