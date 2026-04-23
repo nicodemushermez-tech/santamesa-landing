@@ -8,8 +8,8 @@ interface SEOHeadProps {
 }
 
 export function SEOHead({
-  title = 'Santa Mesa - Elevate Your Vision | AI Integration, Lead Campaigns & Website Optimization',
-  description = 'Sydney-based consulting services specializing in AI integration, lead campaigns, website optimization, and ads management. Transform your business with data-driven strategies. Book a consultation today.',
+  title = 'Santa Mesa | AI & Digital Marketing Agency Sydney',
+  description = 'Sydney agency helping local businesses get more clients with AI automation, lead generation & ads. Free 30-min strategy call. Book today.',
   image = 'https://images.unsplash.com/photo-1558403194-611308249627?w=1200&h=630&fit=crop',
   url = 'https://santamesa.dev',
 }: SEOHeadProps) {

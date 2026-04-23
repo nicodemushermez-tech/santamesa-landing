@@ -339,10 +339,10 @@ function AppInner() {
                 <span className="inline-block mb-4 text-xs font-semibold tracking-widest uppercase" style={{ color: '#C4956A' }}>
                   Sydney, Australia
                 </span>
-                <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white">
+                <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white">
                   Stop Wearing Every Hat.{' '}
                   <span style={{ color: '#C4956A' }}>Let Us Handle the Growth.</span>
-                </h2>
+                </h1>
                 <p className="text-lg leading-relaxed mb-8" style={{ color: '#64748B' }}>
                   Santa Mesa works with local business owners who are brilliant at what they do — but stretched too thin to market it properly. We bring in the leads, automate the follow-up, and build the systems so your business grows without you burning out.
                 </p>

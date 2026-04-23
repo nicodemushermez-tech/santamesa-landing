@@ -90,8 +90,8 @@ export function VideoHero() {
             </span>
           </motion.div>
 
-          {/* Headline */}
-          <motion.h1
+          {/* Headline — styled div, real H1 is in main content for SEO */}
+          <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.8 }}
@@ -99,7 +99,7 @@ export function VideoHero() {
           >
             More Clients.{' '}
             <span style={{ color: '#C4956A' }}>Less Chaos.</span>
-          </motion.h1>
+          </motion.div>
 
           {/* Subheadline */}
           <motion.p
