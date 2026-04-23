@@ -664,11 +664,19 @@ function AppInner() {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center gap-3 py-4" style={{ borderTop: '1px solid #1E2D45' }}>
-            <span className="text-sm" style={{ color: '#475569' }}>Designed & built by</span>
-            <a href="https://dreambuilds.com.au" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80">
-              <img src="/dreambuilds-logo.svg" alt="DreamBuilds" style={{ height: '26px', width: 'auto' }} />
-            </a>
+          <div className="flex items-center justify-center py-4" style={{ borderTop: '1px solid #1E2D45' }}>
+            <span className="text-sm" style={{ color: '#475569' }}>
+              Built by{' '}
+              <a
+                href="https://dreambuilds.com.au"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold transition-colors hover:text-white"
+                style={{ color: '#C4956A' }}
+              >
+                Dream Builds
+              </a>
+            </span>
           </div>
         </footer>
 
