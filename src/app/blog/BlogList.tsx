@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+'use client'
+
+import Link from 'next/link';
 import { motion } from 'motion/react';
 import { ArrowRight, Clock, Tag } from 'lucide-react';
 import { posts } from './posts';
@@ -33,7 +35,7 @@ export function BlogList() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <Link to={`/blog/${post.slug}`} className="group block h-full rounded-2xl overflow-hidden transition-all hover:scale-[1.02]" style={{ background: '#0F1623', border: '1px solid #1E2D45' }}>
+              <Link href={`/blog/${post.slug}`} className="group block h-full rounded-2xl overflow-hidden transition-all hover:scale-[1.02]" style={{ background: '#0F1623', border: '1px solid #1E2D45' }}>
                 <div className="overflow-hidden" style={{ height: '200px' }}>
                   <img
                     src={post.image}

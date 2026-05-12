@@ -1,6 +1,7 @@
+'use client'
+
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
-import { HelmetProvider } from 'react-helmet-async';
 import {
   Brain,
   Target,
@@ -19,13 +20,12 @@ import {
   Moon,
 } from 'lucide-react';
 import { ThemeProvider, useTheme } from './context/theme-context';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ServiceCard } from './components/service-card';
 import { StatsSection } from './components/stats-section';
 import { VideoHero } from './components/video-hero';
-import { SEOHead } from './components/seo-head';
 import { Toaster } from './components/ui/sonner';
-import logoLight from '/logo-light.png';
+const logoLight = '/logo-light.png';
 
 // Lazy-load below-fold heavy components
 const ResultsShowcase = lazy(() => import('./components/results-showcase').then(m => ({ default: m.ResultsShowcase })));
@@ -148,8 +148,7 @@ function AppInner() {
   };
 
   return (
-    <HelmetProvider>
-      <SEOHead />
+    <>
       <Toaster position="top-right" richColors />
       <div className="min-h-screen" style={{ background: '#080C14' }}>
 
@@ -214,7 +213,7 @@ function AppInner() {
                   </button>
                 ))}
                 <Link
-                  to="/blog"
+                  href="/blog"
                   className="text-sm font-medium tracking-wide transition-colors hover:text-white"
                   style={navLinkStyle}
                 >
@@ -718,7 +717,7 @@ function AppInner() {
           </div>
         )}
       </div>
-    </HelmetProvider>
+    </>
   );
 }
 

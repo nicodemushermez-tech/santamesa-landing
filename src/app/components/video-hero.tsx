@@ -1,7 +1,9 @@
+'use client'
+
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
-import logoImage from '/logo-light.png';
+const logoImage = '/logo-light.png';
 
 export function VideoHero() {
   const [videoError, setVideoError] = useState(false);

@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react';
 import { Calendar, Clock, Check } from 'lucide-react';
 import { motion } from 'motion/react';

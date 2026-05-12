@@ -1,7 +1,10 @@
-import { useParams, Link, Navigate } from 'react-router-dom';
+'use client'
+
+import Link from 'next/link';
 import { motion } from 'motion/react';
 import { ArrowLeft, Clock, Tag, ArrowRight } from 'lucide-react';
-import { getPost, posts } from './posts';
+import type { BlogPost as BlogPostType } from './posts';
+import { posts } from './posts';
 
 function renderContent(content: string) {
   const lines = content.trim().split('\n');
@@ -79,11 +82,7 @@ function renderContent(content: string) {
   return elements;
 }
 
-export function BlogPost() {
-  const { slug } = useParams<{ slug: string }>();
-  const post = getPost(slug || '');
-
-  if (!post) return <Navigate to="/blog" replace />;
+export function BlogPost({ post }: { post: BlogPostType }) {
 
   const related = posts.filter(p => p.slug !== post.slug).slice(0, 2);
 
@@ -91,7 +90,7 @@ export function BlogPost() {
     <div className="min-h-screen" style={{ background: '#080C14' }}>
       {/* Back nav */}
       <div className="pt-24 pb-0 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-sm transition-colors hover:text-white mb-8" style={{ color: '#64748B' }}>
+        <Link href="/blog" className="inline-flex items-center gap-2 text-sm transition-colors hover:text-white mb-8" style={{ color: '#64748B' }}>
           <ArrowLeft className="w-4 h-4" /> Back to Blog
         </Link>
       </div>
@@ -134,7 +133,7 @@ export function BlogPost() {
         <div className="mt-16 p-8 rounded-2xl text-center" style={{ background: 'linear-gradient(135deg, rgba(196,149,106,0.1), rgba(196,149,106,0.05))', border: '1px solid rgba(196,149,106,0.2)' }}>
           <h3 className="text-xl font-bold text-white mb-2">Ready to grow your business?</h3>
           <p className="text-sm mb-6" style={{ color: '#64748B' }}>Book a free 30-minute strategy call and we'll map out exactly what would make the biggest difference for you.</p>
-          <Link to="/#booking" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #C4956A, #A67850)', color: '#080C14' }}>
+          <Link href="/#booking" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg, #C4956A, #A67850)', color: '#080C14' }}>
             Book My Free Call <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -145,7 +144,7 @@ export function BlogPost() {
             <h3 className="text-lg font-bold text-white mb-6">More Articles</h3>
             <div className="grid sm:grid-cols-2 gap-6">
               {related.map(p => (
-                <Link key={p.slug} to={`/blog/${p.slug}`} className="group block rounded-xl overflow-hidden transition-all hover:scale-[1.02]" style={{ background: '#0F1623', border: '1px solid #1E2D45' }}>
+                <Link key={p.slug} href={`/blog/${p.slug}`} className="group block rounded-xl overflow-hidden transition-all hover:scale-[1.02]" style={{ background: '#0F1623', border: '1px solid #1E2D45' }}>
                   <img src={p.image} alt={p.title} className="w-full object-cover" style={{ height: '140px' }} />
                   <div className="p-4">
                     <p className="text-sm font-semibold text-white group-hover:text-[#C4956A] transition-colors leading-snug">{p.title}</p>
