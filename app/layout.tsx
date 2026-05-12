@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import '../src/styles/index.css'
 
 export const metadata: Metadata = {
@@ -8,7 +8,6 @@ export const metadata: Metadata = {
     template: '%s | Santa Mesa',
   },
   description: 'Sydney agency helping local businesses get more clients with AI automation, lead generation & ads. Free 30-min strategy call. Book today.',
-  keywords: ['AI integration', 'lead generation', 'digital marketing', 'Google Ads', 'SEO', 'Sydney', 'Australia'],
   authors: [{ name: 'Santa Mesa' }],
   robots: { index: true, follow: true },
   openGraph: {
@@ -21,9 +20,15 @@ export const metadata: Metadata = {
   verification: { google: 'F60Ktz9wRtQ9jPuoxBZc4IlufLatFBMDdt5UHw7fofQ' },
 }
 
+export const viewport: Viewport = {
+  themeColor: '#080C14',
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-AU">
       <body>{children}</body>
     </html>
   )
