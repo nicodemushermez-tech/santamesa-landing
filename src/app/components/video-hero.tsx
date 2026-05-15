@@ -29,7 +29,7 @@ export function VideoHero() {
           onLoadedData={() => setIsLoaded(true)}
           onCanPlay={() => setIsLoaded(true)}
         >
-          <source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+          <source src="/hero.mp4" type="video/mp4" />
         </video>
       )}
 
