@@ -1,14 +1,19 @@
 'use client'
 
-import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 const logoImage = '/logo-light.png';
 
-export function VideoHero() {
-  const [videoError, setVideoError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+// NOTE: Hero video removed 2026-05-27. Previous /hero.mp4 was 5.7 MB at
+// approx 720p which looked pixelated when stretched with object-cover on
+// 1080p+ desktops. The layered gradient + bronze accent + grid pattern
+// carry the visual on their own — and the page loads ~6 MB faster.
+//
+// To re-add a video: drop a 1080p+ MP4 (4-8 Mbps recommended) at
+// /public/hero.mp4 and restore the <video> element below the gradient
+// fallback. See git history for the prior implementation.
 
+export function VideoHero() {
   const scrollToContent = () => {
     const element = document.getElementById('main-content');
     if (element) element.scrollIntoView({ behavior: 'smooth' });
@@ -16,25 +21,23 @@ export function VideoHero() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden" style={{ backgroundColor: '#080C14' }}>
-      {/* Deep dark gradient fallback */}
+      {/* Deep dark gradient — primary background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#080C14] via-[#0F1A2E] to-[#080C14]" style={{ zIndex: 1 }} />
 
-      {/* Video — lazy load after hero paints */}
-      {!videoError && (
-        <video
-          autoPlay muted loop playsInline preload="none"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-          style={{ zIndex: 2, willChange: 'transform' }}
-          onError={() => setVideoError(true)}
-          onLoadedData={() => setIsLoaded(true)}
-          onCanPlay={() => setIsLoaded(true)}
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-      )}
+      {/* Ambient depth — two soft radial glows give the static hero
+          a sense of dimension without needing motion */}
+      <div
+        className="absolute inset-0"
+        style={{
+          zIndex: 2,
+          background:
+            'radial-gradient(ellipse at 25% 20%, rgba(196,149,106,0.12) 0%, transparent 55%),' +
+            'radial-gradient(ellipse at 75% 80%, rgba(15,26,46,0.7) 0%, transparent 60%)',
+        }}
+      />
 
-      {/* Dark overlay — heavier for premium dark feel */}
-      <div className="absolute inset-0 bg-black/65" style={{ zIndex: 3 }} />
+      {/* Dark overlay — slightly lighter now that there's no video to mask */}
+      <div className="absolute inset-0 bg-black/45" style={{ zIndex: 3 }} />
 
       {/* Bronze gradient overlay — adds brand colour */}
       <div
